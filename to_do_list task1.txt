@@ -1,0 +1,31 @@
+import tkinter as Tk
+
+root = Tk.Tk()
+root.title("To Do List")
+root.configure(bg='darkorchid1')
+root.geometry("500x400")
+add = Tk.Entry(root, width=50, borderwidth=3)
+add.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
+
+def update_label(task, var, label):
+    if var.get() == 1:
+        label.config(font=('Arial', 12, 'normal', 'overstrike'))
+    else:
+        label.config(font=('Arial', 12, 'normal'))
+
+def button_creation():
+    task = add.get()
+    var = Tk.IntVar()
+
+    label = Tk.Label(root, text=task, font=('Arial', 12, 'normal'), foreground='black')
+    label.grid(row=root.grid_size()[1], column=0, pady=5)
+
+    checkbox = Tk.Checkbutton(root, text="Check to Strike Off", variable=var,
+                              command=lambda: update_label(task, var, label))
+    checkbox.grid(row=root.grid_size()[1] - 1, column=1, pady=5)
+
+button_create = Tk.Button(root, text="Add Task", padx=40, pady=20, command=button_creation, bg='chartreuse1')
+button_create.grid(row=2, column=0, padx=5, pady=5)
+
+
+root.mainloop()
